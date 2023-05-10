@@ -107,9 +107,10 @@ const Section = styled.section` // section below the nav bar
 const Hero = styled.div` // styling for text and image in hero
   width: 100%;
   h1 {
-    padding-bottom: 0;
-    width: 55%;
-    font-size: 56px;
+    padding-top : 45px;
+    padding-bottom: 0px;
+    width: 45%;
+    font-size: 46px;
     color: #2977c9;
     font-weight: 200;
     line-height: 70px;
@@ -124,7 +125,7 @@ const Hero = styled.div` // styling for text and image in hero
   img {
     /* z-index: -1; */
     width: 800px;
-    height: 670px;
+    height: 870px;
     position: absolute;
     bottom: -5px;
     right: -150px;
