@@ -111,8 +111,8 @@ const Logo = styled.span`
 
 const Search = styled.div`
   opacity: 1;
-  flex: 10;
-  width: 100%;
+  flex: 1;
+  width:100% ;
   position: relative;
   & > div {
     max-width: 280px;
