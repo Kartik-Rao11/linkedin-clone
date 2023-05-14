@@ -1,8 +1,14 @@
 import React from 'react'
 import { styled } from 'styled-components';
+import { connect } from "react-redux";
+import { signInAPI } from "../actions";
+import { Navigate } from "react-router-dom";
+
+
 function Login(props) {
   return (
    <Container>
+    {props.user && <Navigate to = "/home"/> } {/** if there is a user redirect to home page */}
     <Nav> {/*navigation bar */}
         <a href="/">
           <img src="/images/LinkedIn-Logo-wine.svg" alt="" />
@@ -18,7 +24,7 @@ function Login(props) {
           <img src="/images/Linkedin-login.svg" alt="" />
         </Hero>
         <Form>
-          <Google>
+          <Google  onClick={() => props.signIn()}> {/** onclick we will call function sign in */}
             <img src="/images/google (1).svg" alt="" />
               Sign in with Google
           </Google>
@@ -170,6 +176,14 @@ const Google = styled.button`
   }
 `;
 
+const mapStatetoProps = (state) => {
+  return {
+    user: state.userState.user, //updating the user here
+  };
+};
 
+const mapDispatchtoProps = (dispatch) => ({
+  signIn: () => dispatch(signInAPI()), //when sign In is called we dispatch a action with calling signInAPI function in action folder
+});
 
-export default Login
+export default connect(mapStatetoProps, mapDispatchtoProps)(Login);

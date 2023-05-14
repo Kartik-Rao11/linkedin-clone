@@ -1,7 +1,8 @@
 import React from 'react'
 import { styled } from 'styled-components'
+import { connect } from 'react-redux';
 
-function Leftside() {
+function Leftside(props) {
   return (
     <Container> {/** container tag to take the complete left side card */}
     <ArtCard> {/** this component has the first half of the card */}
@@ -9,7 +10,7 @@ function Leftside() {
         <CardBackground /> {/** background for userInfo component */}
         <a>
           <Photo /> {/** profile photo component */}
-          <Link>Welcome, there!</Link>
+          <Link>Welcome, {props.user ? props.user.displayName : "there"}!</Link> {/** to displayy user name when logged in */}
         </a>
         <a>
           <AddPhotoText>Add a photo</AddPhotoText>
@@ -206,4 +207,11 @@ a {
 }
 `;
 
-export default Leftside
+const mapStatetoProps = (state) => { // just to map the change in state to redux 
+  return {
+    user: state.userState.user,
+  };
+};
+
+
+export default connect(mapStatetoProps)(Leftside);

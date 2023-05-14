@@ -1,9 +1,13 @@
 import React from 'react'
 import { styled } from 'styled-components';
+import { connect } from 'react-redux';
+import { signOutAPI } from '../actions';
+import { Navigate } from 'react-router-dom';
 
-function Header() {
+function Header(props) {
   return (
     <Container>
+       {!props.user && <Navigate to="/" />}
       <Content>
         <Logo> {/*Home logo of linkedin*/}
           <a href="/home">
@@ -59,12 +63,17 @@ function Header() {
 
             <User> {/**user component is in nav bar but not a navList component */}
               <a>
-                <img src="/images/user.svg" alt="" />
-                <span>Me</span>
+              {props.user && props.user.photoURL ? ( // if there is user and signed in user's photo exist then
+                  <img src={props.user.photoURL} alt="" /> // then display the photo url
+                ) : (
+                  <img src="/images/user.svg" alt="" /> // else display the default one
+                )}
+                <span>Me
                 <img src="/images/down-icon.svg" alt="" />
+                </span>
               </a>
 
-              <SignOut> {/** user component has signout component in it as a drop down functionality */}
+              <SignOut onClick={()=> props.signOut()}> {/** user component has signout component in it as a drop down functionality */}
                 <a>Sign Out</a>
               </SignOut>
             </User>
@@ -263,4 +272,14 @@ const Work = styled(User)`
   border-left: 1px solid rgba(0, 0, 0, 0.08);
 `;
 
-export default Header
+const mapStatetoProps = (state) => {
+  return {
+    user: state.userState.user,
+  };
+};
+
+const mapDispatchtoProps = (dispatch) => ({
+  signOut: () => dispatch(signOutAPI()),
+});
+
+export default connect(mapStatetoProps, mapDispatchtoProps)(Header);
