@@ -1,10 +1,13 @@
 import React from 'react'
 import { styled } from 'styled-components';
 import { connect } from 'react-redux';
-import firebase from 'firebase/compat';
+import firebase from "firebase";
 import ReactPlayer from "react-player";
+import { useState } from 'react';
+import { postArticleAPI } from '../actions';
 
-function PostModal() {
+
+function PostModal(props) {
     const [editorText, setEditorText] = useState(""); //for change in state of the text
     const [shareImage, setShareImage] = useState(""); // for change in state of the Image
     const [videoLink, setVideoLink] = useState(""); // for change in state of the Video Link
@@ -25,19 +28,19 @@ function PostModal() {
       setassetArea(area);
     };
   
-    const postArticle = (e) => {
+    const postArticle = (e) => { //func to post on the wall of linkedIn
       e.preventDefault();
       if (e.target !== e.currentTarget) {
         return;
       }
-      const payload = {
+      const payload = { //payload = data that we are uploading
         image: shareImage,
         video: videoLink,
         user: props.user,
         description: editorText,
         timestamp: firebase.firestore.Timestamp.now(),
       };
-      props.postArticle(payload);
+      props.postArticle(payload); //called the function postArticle
       reset(e);
     };
   
@@ -130,7 +133,7 @@ function PostModal() {
                 </SharedComment>
                 <PostButton
                   disabled={!editorText ? true : false}
-                  onClick={(event) => postArticle(event)}
+                  onClick={(event) => postArticle(event)} //callled the func. post article onclikc
                 >
                   Post
                 </PostButton>

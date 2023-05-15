@@ -1,24 +1,23 @@
-import  firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
-import { getStorage } from "firebase/storage";
+import firebase from "firebase";
+import "firebase/auth"
+import "firebase/firestore";
 
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAJzD3Obzj0Wo0ysTF7MhX9dTjEi1RNpp4",
-    authDomain: "linkedin-clone-4c122.firebaseapp.com",
-    projectId: "linkedin-clone-4c122",
-    storageBucket: "linkedin-clone-4c122.appspot.com",
-    messagingSenderId: "713088303157",
-    appId: "1:713088303157:web:e57a1bed2329574df1f17c"
+  apiKey: "AIzaSyD8_-4yqusuR4DgU2RcSEW0GWeKufa8bxU",
+  authDomain: "linkedin-clone-d726f.firebaseapp.com",
+  projectId: "linkedin-clone-d726f",
+  storageBucket: "linkedin-clone-d726f.appspot.com",
+  messagingSenderId: "618673211490",
+  appId: "1:618673211490:web:61759e1817a7077158293b"
   };
-
-const firebaseApp = firebase.initializeApp(firebaseConfig); //to intitalize the app
-const db = firebaseApp.firestore(); //database for our app
-const auth = firebase.auth(); //for authentication for users
-const provider = new firebase.auth.GoogleAuthProvider(); //for new users?
-const storage = getStorage(firebaseApp); //storage for firebase
+  
+  const firebaseApp = firebase.initializeApp(firebaseConfig);
+  const db = firebaseApp.firestore();
+  const auth = firebase.auth();
+  const provider = new firebase.auth.GoogleAuthProvider();
+  const storage = firebase.storage();
 
 export { auth, provider, storage };
 export default db;
